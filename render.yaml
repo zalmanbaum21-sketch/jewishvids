@@ -12,11 +12,13 @@ services:
         generateValue: true
       - key: DATABASE_URL
         sync: false
-      - key: R2_ENDPOINT
+      - key: VCDN_API_KEY
         sync: false
-      - key: R2_ACCESS_KEY_ID
+      - key: VITE_VCDN_API_KEY
         sync: false
-      - key: R2_SECRET_ACCESS_KEY
+      - key: CLOUDINARY_CLOUD_NAME
         sync: false
-      - key: R2_BUCKET_NAME
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
         sync: false

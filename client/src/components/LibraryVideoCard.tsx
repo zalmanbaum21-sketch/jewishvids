@@ -22,7 +22,7 @@ export default function LibraryVideoCard({ video }: { video: LibraryVideoCardVid
   return (
     <article className="overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/75 shadow-[0_14px_55px_rgba(30,38,48,0.06)]">
       <div className="aspect-video bg-[#dceaf4]">
-        <video className="h-full w-full object-cover" controls controlsList="nodownload noremoteplayback" disablePictureInPicture preload="metadata" poster={video.thumbnailUrl || undefined} src={video.storageUrl} onContextMenu={event => event.preventDefault()} onDragStart={event => event.preventDefault()} />
+        {video.storageUrl.startsWith("/manus-storage/vcdn/") ? <iframe className="h-full w-full border-0" src={video.storageUrl} title={video.title} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen /> : <video className="h-full w-full object-cover" controls controlsList="nodownload noremoteplayback" disablePictureInPicture preload="metadata" poster={video.thumbnailUrl || undefined} src={video.storageUrl} onContextMenu={event => event.preventDefault()} onDragStart={event => event.preventDefault()} />}
       </div>
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-5">

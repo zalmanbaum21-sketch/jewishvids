@@ -36,4 +36,4 @@ The admin uploader now reports live transfer speed, estimated remaining time, re
 
 ## Deployment
 
-This project is configured for a Node.js web service on Render. The database uses a MySQL-compatible TiDB Cloud Starter instance and video/object storage uses a private Cloudflare R2 bucket. Set the variables in `.env.example` in Render before deploying. Do not commit real secrets.
+This project is configured for a Node.js web service on Render. The database uses a MySQL-compatible TiDB Cloud Starter instance. Large videos upload directly to VCDN using resumable 8 MB chunks, and optional image thumbnails use Cloudinary. Set the variables in `.env.example` in Render before deploying. Do not commit real secrets. VCDN API keys are required both as `VCDN_API_KEY` (server) and `VITE_VCDN_API_KEY` (browser build), following VCDN’s documented browser upload flow.

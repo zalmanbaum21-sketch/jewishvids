@@ -25,8 +25,8 @@ import { trpc } from "@/lib/trpc";
 import { uploadVideoFile, uploadVideoFileResumable, type UploadProgress } from "@/lib/videoUpload";
 import { getVideoArtistLabel } from "@/lib/videoPresentation";
 import LibraryVideoCard from "@/components/LibraryVideoCard";
-const MAX_VIDEO_BYTES = 3 * 1024 * 1024 * 1024;
-const MAX_VIDEO_GB = 3;
+const MAX_VIDEO_BYTES = 5 * 1024 * 1024 * 1024;
+const MAX_VIDEO_GB = 5;
 
 type VideoRecord = {
   id: number;
@@ -173,7 +173,7 @@ function VideoCard({ video, onEdit, onDelete, deleting }: { video: VideoRecord; 
   return (
     <article className="group overflow-hidden rounded-[1.5rem] border border-black/10 bg-white/70 shadow-[0_10px_40px_rgba(30,38,48,0.05)] transition-transform duration-200 hover:-translate-y-1">
       <div className="relative aspect-video overflow-hidden bg-[#dceaf4]">
-        <video className="h-full w-full object-cover" controls controlsList="nodownload noremoteplayback" disablePictureInPicture preload="metadata" poster={video.thumbnailUrl || undefined} src={video.storageUrl} onContextMenu={event => event.preventDefault()} onDragStart={event => event.preventDefault()} />
+        {video.storageUrl.startsWith("/manus-storage/vcdn/") ? <iframe className="h-full w-full border-0" src={video.storageUrl} title={video.title} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen /> : <video className="h-full w-full object-cover" controls controlsList="nodownload noremoteplayback" disablePictureInPicture preload="metadata" poster={video.thumbnailUrl || undefined} src={video.storageUrl} onContextMenu={event => event.preventDefault()} onDragStart={event => event.preventDefault()} />}
       </div>
       <div className="flex items-start justify-between gap-4 p-5">
         <div className="min-w-0"><h3 className="truncate font-semibold tracking-[-0.02em]">{video.title}</h3>{getVideoArtistLabel(video.artist) && <p className="mt-1 truncate text-sm text-black/60">{getVideoArtistLabel(video.artist)}</p>}<p className="mt-1 truncate text-xs text-black/45">{video.originalName} · {formatBytes(video.sizeBytes)}</p></div>
@@ -217,7 +217,7 @@ function AdminPanel({ onClose }: { onClose: () => void }) {
   const handleUpload = async () => {
     if (!file) return toast.error("Choose a video first.");
     if (!title.trim()) return toast.error("Add a title for this video.");
-    if (!file.type.startsWith("video/") || file.size > MAX_VIDEO_BYTES) return toast.error("Choose a video file no larger than 3 GB.");
+    if (!file.type.startsWith("video/") || file.size > MAX_VIDEO_BYTES) return toast.error("Choose a video file no larger than 5 GB.");
     if (thumbnailFile && (!thumbnailFile.type.startsWith("image/") || thumbnailFile.size > 10 * 1024 * 1024)) return toast.error("Choose an image thumbnail no larger than 10 MB.");
     setUploading(true); setProgress(0); setThumbnailProgress(0); setUploadProgressDetails(null); setUploadStage("Uploading video…");
     try {
