@@ -1,0 +1,22 @@
+# TiDB Cloud Starter / MySQL-compatible database
+DATABASE_URL=mysql://USER:PASSWORD@HOST:4000/DATABASE?ssl={"rejectUnauthorized":true}
+
+# VCDN video storage. Add this to Render as VCDN_API_KEY.
+# The browser also needs the same key at build time as VITE_VCDN_API_KEY.
+VCDN_API_KEY=
+VITE_VCDN_API_KEY=
+
+# Cloudinary is used only for optional image thumbnails.
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+# Used to sign the site's HTTP-only access-code sessions
+JWT_SECRET=replace-with-a-long-random-secret
+
+# Optional Manus compatibility variables; leave blank if you are not using Manus OAuth/AI features
+VITE_APP_ID=
+OAUTH_SERVER_URL=
+OWNER_OPEN_ID=
+BUILT_IN_FORGE_API_URL=
+BUILT_IN_FORGE_API_KEY=
